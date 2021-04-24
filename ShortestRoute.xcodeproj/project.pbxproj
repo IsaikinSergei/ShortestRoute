@@ -13,6 +13,7 @@
 		EA71FCB62628E46000AEC5C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA71FCB42628E46000AEC5C5 /* LaunchScreen.storyboard */; };
 		EA71FCC12628E46100AEC5C5 /* ShortestRouteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA71FCC02628E46100AEC5C5 /* ShortestRouteTests.swift */; };
 		EA71FCCC2628E46100AEC5C5 /* ShortestRouteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA71FCCB2628E46100AEC5C5 /* ShortestRouteUITests.swift */; };
+		EA71FD382634AA7000AEC5C5 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA71FD372634AA6F00AEC5C5 /* Alert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		EA71FCC72628E46100AEC5C5 /* ShortestRouteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShortestRouteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA71FCCB2628E46100AEC5C5 /* ShortestRouteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortestRouteUITests.swift; sourceTree = "<group>"; };
 		EA71FCCD2628E46100AEC5C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EA71FD372634AA6F00AEC5C5 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 			children = (
 				EA71FCA92628E45F00AEC5C5 /* AppDelegate.swift */,
 				EA71FCAD2628E45F00AEC5C5 /* ViewController.swift */,
+				EA71FD372634AA6F00AEC5C5 /* Alert.swift */,
 				EA71FCB22628E46000AEC5C5 /* Assets.xcassets */,
 				EA71FCB42628E46000AEC5C5 /* LaunchScreen.storyboard */,
 				EA71FCB72628E46000AEC5C5 /* Info.plist */,
@@ -251,6 +254,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA71FD382634AA7000AEC5C5 /* Alert.swift in Sources */,
 				EA71FCAE2628E45F00AEC5C5 /* ViewController.swift in Sources */,
 				EA71FCAA2628E45F00AEC5C5 /* AppDelegate.swift in Sources */,
 			);
