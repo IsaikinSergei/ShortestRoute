@@ -40,6 +40,9 @@ class ViewController: UIViewController {
         button.isHidden = true
         return button
     }()
+    
+    // MARK: - Создаем массив аннотаций
+    var annotationsArray = [MKPointAnnotation]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +56,7 @@ class ViewController: UIViewController {
     
     @objc func addAdressButtonTapped() {
         alertAddAdress(title: "Добавить", placeholder: "Введите адрес") { (text) in
-            print(text)
+            self.setupPlacemark(adressPlace: text)
         }
     }
     
@@ -64,7 +67,37 @@ class ViewController: UIViewController {
     @objc func resetButtonTapped() {
         print("TapReset")
     }
+    
+    private func setupPlacemark(adressPlace: String) {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(adressPlace) { [self] (placemarks, error) in
+            
+            if let error = error {
+                print(error)
+                alertError(title: "Ошибка", message: "Сервер недоступен. Попробуйте добавить адрес ещё раз")
+                return
+            }
+            
+            guard let placemarks = placemarks else { return }
+            let placemark = placemarks.first
+            
+            let annotation = MKPointAnnotation()
+            annotation.title = "\(adressPlace)"
+            guard let placemarkLocation = placemark?.location else { return }
+            annotation.coordinate = placemarkLocation.coordinate
+            
+            annotationsArray.append(annotation)
+            
+            if annotationsArray.count > 2 {
+                routeButton.isHidden = false
+                resetButton.isHidden = false
+            }
+            
+            mapView.showAnnotations(annotationsArray, animated: true)
+        }
+    }
 }
+    // MARK: - Закрепляем элементы на экране с помощью констрэйнтов
 
 extension ViewController {
     

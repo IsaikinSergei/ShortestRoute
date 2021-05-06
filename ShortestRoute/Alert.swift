@@ -9,6 +9,8 @@ import UIKit
 
 extension UIViewController {
     
+    // MARK: - Устанавливаем алёрты на действия и события
+    
     func alertAddAdress(title: String, placeholder: String, completionHandler: @escaping (String) -> Void) {
         
         let alertController = UIAlertController(title: title, message: nil, preferredStyle: .alert)
