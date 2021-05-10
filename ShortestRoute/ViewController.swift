@@ -47,6 +47,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        mapView.delegate = self
+        
         setConstraints()
         
         addAdressButton.addTarget(self, action: #selector(addAdressButtonTapped), for: .touchUpInside)
@@ -96,8 +98,57 @@ class ViewController: UIViewController {
             mapView.showAnnotations(annotationsArray, animated: true)
         }
     }
+    
+    // MARK: - Создаём метод который построит маршрут между двумя точками
+    
+    private func createDirectionRequest(startCoordinate: CLLocationCoordinate2D, destinationCoordinate: CLLocationCoordinate2D) {
+        
+        let startLocation = MKPlacemark(coordinate: startCoordinate)
+        let destinationLocation = MKPlacemark(coordinate: destinationCoordinate)
+        
+        let request = MKDirections.Request()
+        request.source = MKMapItem(placemark: startLocation)
+        request.destination = MKMapItem(placemark: destinationLocation)
+        request.transportType = .walking
+        request.requestsAlternateRoutes = true
+        
+        let direction = MKDirections(request: request)
+        direction.calculate { (response, error) in
+            
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            guard let response = response else {
+                self.alertError(title: "Ошибка", message: "Маршрут недоступен")
+                return
+            }
+            
+            // выбираем возможный кратчайший маршрут с помощью цикла for in перебирая массив возможных маршрутов
+            var minRoute = response.routes[0]
+            for route in response.routes {
+                minRoute = (route.distance < minRoute.distance) ? route : minRoute
+            }
+            
+            self.mapView.addOverlay(minRoute.polyline)
+        }
+    }
 }
-    // MARK: - Закрепляем элементы на экране с помощью констрэйнтов
+  
+// MARK: - Устанавливаем (отрисовываем) видимую линию маршрута на mapview
+
+extension ViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        
+        let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
+        renderer.strokeColor = .red
+        return renderer
+    }
+}
+
+// MARK: - Закрепляем элементы на экране с помощью констрэйнтов
 
 extension ViewController {
     
