@@ -63,7 +63,9 @@ class ViewController: UIViewController {
     }
     
     @objc func routeButtonTapped() {
-        print("TapRoute")
+        
+        
+        
     }
     
     @objc func resetButtonTapped() {
